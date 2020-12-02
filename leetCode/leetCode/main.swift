@@ -8,9 +8,7 @@
 import Foundation
 
 
-var a = [1,10,20,11]
-var b = Array().searchInsert(a, 20)
-
-
+var a = [[1,2,3,4],[5,0,9,5],[5,4,8,6]]
+var b = Array().setZeroes(&a)
 print("结果:%d",b)
 
