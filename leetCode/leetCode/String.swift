@@ -103,4 +103,20 @@ class _String {
         let end = s.index(s.startIndex, offsetBy: j)
         return String(s[start..<end])
     }
+    
+    //给定一个字符串，逐个翻转字符串中的每个单词。
+    func reverseWords(_ s: String) -> String {
+        let len = s.count
+        if len == 0 {
+            return ""
+        }
+        let arr = s.split(separator: " ")
+        if arr.count == 1 {
+            return String(arr[0])
+        }
+        let revers = arr.reversed()
+        var str = revers.reduce("") { $0 + " " + $1}
+        str.remove(at: str.startIndex)
+        return str
+    }
 }
