@@ -12,8 +12,7 @@ var a = [[1,2,3,4],[5,0,9,5],[5,4,8,6]]
 
 let source = "ahjkbcdasddsd"
 print("%s", _String().longestPalindrome2(source))
-let k = "the sky is blue"
-let arr = _String().reverseWords(k)
-print("%d",arr)
+var k:[Int] = [1,2,3,4,5,6]
+_String().twoSum2(k, 100)
 
 

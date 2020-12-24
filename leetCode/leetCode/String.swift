@@ -119,4 +119,72 @@ class _String {
         str.remove(at: str.startIndex)
         return str
     }
+    
+    func reverseString(_ s: inout [Character]) {
+        var left = 0
+        var right = s.count - 1
+        while left <= right {
+            let tmp = s[left]
+            s[left] = s[right]
+            s[right] = tmp
+            
+            left += 1
+            right -= 1
+        }
+    }
+    
+    func arrayPairSum(_ nums: [Int]) -> Int {
+        return nums.sorted().enumerated().filter { $0.offset % 2 == 0 }.reduce(0, { $0 + $1.element })
+    }
+    
+    //双指针
+    func twoSum(_ numbers: [Int], _ target: Int) -> [Int] {
+        var left = 0
+        var right = numbers.count - 1
+        
+        while left < right {
+            if numbers[left] + numbers[right] == target {
+                return [left + 1, right + 1]
+            }else if numbers[left] + numbers[right] > target {
+                right -= 1
+            }else{
+                left += 1
+            }
+        }
+        return []
+    }
+    
+    //二分查找
+    func twoSum1(_ numbers: [Int], _ target: Int) -> [Int] {
+        for i in 0 ..< numbers.count {
+            var low = i + 1
+            var high = numbers.count - 1
+            while low <= high {
+                let mid = (high - low) / 2 + low
+                if numbers[mid] == target - numbers[i] {
+                    return [i + 1, mid + 1]
+                } else if (numbers[mid] > target - numbers[i]) {
+                    high = mid - 1
+                } else {
+                    low = mid + 1
+                }
+            }
+        }
+        return [-1, -1]
+    }
+
+
+    
+    //哈希表
+    func twoSum2(_ numbers: [Int], _ target: Int) -> [Int] {
+        var map = [Int: Int]()
+        for i in 0..<numbers.count {
+            if map[target - numbers[i]] != nil {
+                return [map[target - numbers[i]]!, i + 1]
+            }
+            map[numbers[i]] = i + 1
+        }
+        return [-1, -1]
+    }
+
 }
