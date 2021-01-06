@@ -12,7 +12,8 @@ var a = [[1,2,3,4],[5,0,9,5],[5,4,8,6]]
 
 let source = "ahjkbcdasddsd"
 print("%s", _String().longestPalindrome2(source))
-var k:[Int] = [1,2,3,4,5,6]
-_String().twoSum2(k, 100)
+var k:[Int] = [1,1,0,1]
+
+_String().findMaxConsecutiveOnes(k)
 
 

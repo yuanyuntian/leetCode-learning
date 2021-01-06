@@ -186,5 +186,79 @@ class _String {
         }
         return [-1, -1]
     }
+    /*
+    输入: [1,1,0,1,1,1]
+    输出: 3
+    解释: 开头的两位和最后的三位都是连续1，所以最大连续1的个数是 3.
+    注意：
+    输入的数组只包含 0 和1。
+    输入数组的长度是正整数，且不超过 10,000。
+    */
+    /*用一个计数器 count 记录 1 的数量，另一个计数器 maxCount 记录当前最大的 1 的数量。
+    当我们遇到 1 时，count 加一。
+    当我们遇到 0 时：
+    将 count 与 maxCount 比较，maxCoiunt 记录较大值。
+    将 count 设为 0。
+    返回 maxCount。
+     */
 
+    func findMaxConsecutiveOnes(_ nums: [Int]) -> Int {
+        var count = 0, max = 0
+        var i = 0
+        while i < nums.count {
+            if nums[i] == 1 {
+                count += 1
+            }else{
+                if count > max {
+                    max = count
+                }
+                count = 0
+            }
+            i += 1
+        }
+        if count > max {
+            max = count
+        }
+        return max
+    }
+    
+    //双指针
+    func findMaxConsecutiveOnes2(_ nums: [Int]) -> Int {
+        var i = 0, j = 0, max = 0
+        while j < nums.count {
+            if nums[j] == 0 {
+                if max <= j - i {
+                    max = j - i
+                    i = j + 1
+                }
+            }
+            if j == nums.count - 1 && nums[j] == 1 {
+                if max <= j + 1 - i {
+                    max = j + 1 - i
+                }
+            }
+            j += 1
+        }
+        return max
+    }
+    
+    func minSubArrayLen(_ s: Int, _ nums: [Int]) -> Int {
+        let n = nums.count
+        if n == 0 {
+            return 0
+        }
+        var ans = Int.max
+        var start = 0, end = 0
+        var sum = 0
+        while end < n {
+            sum += nums[end]
+            while sum >= s {
+                ans = min(ans, end - start + 1)
+                sum -= nums[start]
+                start += 1
+            }
+            end += 1
+        }
+        return ans == Int.max ? 0:ans
+    }
 }
