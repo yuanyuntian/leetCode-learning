@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:CircularQueue/CircularQueue.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:hashMap/hashMap.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:hashSet/hashSet.xcodeproj">
    </FileRef>
 </Workspace>

@@ -26,8 +26,7 @@ void listPush(struct List * head, int key, int val) {
 
 void listDelete(struct List * head, int key) {
     for (struct List * it = head; it->next; it = it->next) {
-        if (it->next->key == key) {
-            struct List * tmp = it->next;
+             struct List * tmp = it->next;
             it->next = tmp->next;
             free(tmp);
             break;
