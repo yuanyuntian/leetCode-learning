@@ -89,42 +89,41 @@ char * longestPalindrome(char * s) {
 
 char * longestPalindrome2(char * s) {
     int len = strlen(s);
-    if(len <= 1){
-        return s;
-    }
-    int start = 0;
-    int maxlen = 0;
-    
+    int maxSubStrStart = 0;
+    int maxSubStrLen = 0;
+
     //i表示中间元素下标
     for (int i = 1; i < len; i++) {
-        //偶数长度
-        int low = i - 1;
-        int high = i;
-        while (low >= 0 && high < len && s[low] == s[high]) {
-            low --;
-            high ++;
+        int left = i - 1;
+        int right = i + 1;
+        int currentSubstrLen = 1;
+        
+        while (left >= 0 && s[left] == s[i]) {
+            left --;
+            currentSubstrLen++;
         }
-        if (high - low - 1 > maxlen) {
-            maxlen = high - low - 1;
-            start = low + 1;
+
+        while (right < len  && s[right] == s[i]) {
+            right ++;
+            currentSubstrLen++;
         }
         
-        //奇数长度
-        low = i - 1;
-        high = i + 1;
-        while (low >= 0 && high < len && s[low] == s[high]) {
-            low --;
-            high ++;
+        while (left >= 0 && right < len && s[left] == s[right]) {
+            left --;
+            right ++;
+            currentSubstrLen += 2;
         }
-        if (high - low - 1 > maxlen) {
-            maxlen = high - low - 1;
-            start = low + 1;
+        
+        if (currentSubstrLen > maxSubStrLen) {
+            maxSubStrLen = currentSubstrLen;
+            maxSubStrStart = left + 1;
         }
+        
     }
-    char * arr = (char *)malloc(sizeof(int) * (maxlen * 2));
+    char * arr = (char *)malloc(sizeof(int) * (maxSubStrLen * 2));
     int i = 0;
-    for (; i< maxlen; i++) {
-        arr[i] = s[start++];
+    for (; i< maxSubStrLen; i++) {
+        arr[i] = s[maxSubStrStart++];
     }
     arr[i] = '\0';
     return arr;
@@ -171,8 +170,8 @@ char * longestPalindrome3(char * s) {
 //<<<<<<<<<<<<<<<<<<<<<中心扩展法<<<<<<<<<<<<<<<<<<<<<<<<<<<<<//
 int main(int argc, const char * argv[]) {
     // insert code here...
-    char * s = "aaaaabcbefgfeicba";
-    char * p = longestPalindrome3(s);
+    char * s = "abcbefgfeicba";
+    char * p = longestPalindrome2(s);
     printf("%s\n",p);
     return 0;
 }
